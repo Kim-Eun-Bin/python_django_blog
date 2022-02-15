@@ -1,9 +1,16 @@
 from django.db import models
 from django.utils import timezone
+from django import forms
+
+
+def min_length_2_validator(value):
+    if len(value) < 2:
+        raise forms.ValidationError('title은 2글자 이상 입력해주세요')
+
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User',on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, validators=[min_length_2_validator])
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
