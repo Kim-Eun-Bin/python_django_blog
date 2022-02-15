@@ -8,7 +8,7 @@ from blog.forms import PostModelForm
 
 def post_new(request):
     post_form = PostModelForm()
-    return render(request, 'blog/post_edit.html', {'form': post_form})
+    return render(request, 'blog/post_edit.html', {'post_form': post_form})
 
 
 def post_detail(request, pk):
